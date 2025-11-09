@@ -1,0 +1,164 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MathApp());
+}
+
+class MathApp extends StatelessWidget {
+  const MathApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Pembelajaran Bangun Ruang',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.redAccent,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          secondary: Colors.yellow,
+        ),
+      ),
+      home: const HomePage(),
+    );
+  }
+}
+
+// 🏠 HALAMAN UTAMA
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Belajar Bangun Ruang',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.redAccent,
+        centerTitle: true,
+      ),
+      backgroundColor: Colors.yellow[100],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.view_in_ar, size: 100, color: Colors.redAccent),
+            const SizedBox(height: 20),
+            const Text(
+              'Pembelajaran Matematika',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.redAccent,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Mengenal Bangun Ruang',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.brown,
+              ),
+            ),
+            const SizedBox(height: 30),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Text(
+                'Dalam pelajaran ini, kita akan mempelajari bentuk-bentuk bangun ruang seperti kubus, balok, prisma, dan limas.',
+                style: TextStyle(fontSize: 16, color: Colors.black87),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: 40),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DaftarBangunRuangPage()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text(
+                'Mulai Belajar',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// 📚 HALAMAN KEDUA: DAFTAR BANGUN RUANG
+class DaftarBangunRuangPage extends StatelessWidget {
+  const DaftarBangunRuangPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Map<String, String>> bangunRuang = [
+      {'nama': 'Kubus', 'deskripsi': 'Memiliki 6 sisi berbentuk persegi sama besar.'},
+      {'nama': 'Balok', 'deskripsi': 'Memiliki 6 sisi berbentuk persegi panjang.'},
+      {'nama': 'Prisma Segitiga', 'deskripsi': 'Memiliki alas dan tutup berbentuk segitiga.'},
+      {'nama': 'Limas', 'deskripsi': 'Memiliki alas dan sisi tegak berbentuk segitiga.'},
+    ];
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Daftar Bangun Ruang',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.redAccent,
+        centerTitle: true,
+      ),
+      backgroundColor: Colors.yellow[50],
+      body: ListView.builder(
+        itemCount: bangunRuang.length,
+        itemBuilder: (context, index) {
+          return Card(
+            color: Colors.yellow[100],
+            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            elevation: 5,
+            child: ListTile(
+              leading: const Icon(Icons.view_in_ar, color: Colors.redAccent, size: 40),
+              title: Text(
+                bangunRuang[index]['nama']!,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.redAccent,
+                ),
+              ),
+              subtitle: Text(
+                bangunRuang[index]['deskripsi']!,
+                style: const TextStyle(color: Colors.black87),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
